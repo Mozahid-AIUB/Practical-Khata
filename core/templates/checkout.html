@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="mb-4"><i class="fas fa-credit-card"></i> Checkout</h2>
+
+        <div class="row">
+            <!-- Delivery Form -->
+            <div class="col-md-8 mb-4">
+                <div class="checkout-card">
+                    <h4 class="mb-4">Delivery Information</h4>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="checkout-label">Full Name *</label>
+                            <input type="text" class="checkout-input" name="name" required placeholder="Your full name">
+                        </div>
+                        <div class="mb-3">
+                            <label class="checkout-label">Phone Number *</label>
+                            <input type="tel" class="checkout-input" name="phone" placeholder="01XXXXXXXXX" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="checkout-label">Delivery Address *</label>
+                            <textarea class="checkout-input" name="address" rows="3" required
+                                placeholder="Your full delivery address"></textarea>
+                        </div>
+                        <button type="submit" class="checkout-btn">
+                            <i class="fab fa-whatsapp"></i> Confirm Order via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-md-4">
+                <div class="checkout-card">
+                    <div class="summary-header">
+                        <h5 class="mb-0">Order Summary</h5>
+                    </div>
+                    <div class="summary-body">
+                        {% if cart %}
+                        {% for pid, item in cart.items %}
+                        <div class="order-item">
+                            <div class="d-flex align-items-center gap-2">
+                                {% if item.image %}
+                                <img src="{{ item.image }}" alt="{{ item.name }}" width="44" class="rounded"
+                                    style="object-fit:cover;height:44px;">
+                                {% endif %}
+                                <div>
+                                    <div class="item-name">{{ item.name }}</div>
+                                    <div class="item-meta">৳{{ item.price|floatformat:2 }} × {{ item.quantity }}</div>
+                                </div>
+                            </div>
+                            <div class="item-subtotal">৳{{ item.subtotal|floatformat:2 }}</div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p class="text-center" style="color:#aaa;padding:20px 0;">Cart is empty</p>
+                        {% endif %}
+
+                        <hr style="border-color:rgba(255,255,255,0.1);margin:12px 0;">
+
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>৳{{ total|floatformat:2 }}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Delivery</span>
+                            <span>৳110.00</span>
+                        </div>
+                        <hr style="border-color:rgba(255,255,255,0.1);margin:12px 0;">
+                        <div class="summary-row total-row">
+                            <span>Total</span>
+                            <span class="total-amount">৳{{ total|floatformat:2 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ── Checkout cards ── */
+    .checkout-card {
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 28px;
+        color: #f0f0f0;
+        margin-bottom: 20px;
+    }
+
+    /* ── Form elements ── */
+    .checkout-label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #ccc;
+    }
+
+    .checkout-input {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: 1px solid rgba(91, 127, 255, 0.35);
+        background: rgba(255, 255, 255, 0.07);
+        color: #f0f0f0;
+        font-size: 15px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        outline: none;
+        resize: vertical;
+    }
+
+    .checkout-input::placeholder {
+        color: #777;
+    }
+
+    .checkout-input:focus {
+        border-color: #5b7fff;
+        box-shadow: 0 0 0 3px rgba(91, 127, 255, 0.2);
+    }
+
+    /* ── Submit button ── */
+    .checkout-btn {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #00d084, #00b876);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        letter-spacing: 0.4px;
+    }
+
+    .checkout-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 208, 132, 0.35);
+    }
+
+    .checkout-btn:active {
+        transform: translateY(-1px);
+    }
+
+    /* ── Order summary ── */
+    .summary-header {
+        background: linear-gradient(135deg, #5b7fff, #7c3aed);
+        padding: 14px 20px;
+        border-radius: 8px 8px 0 0;
+        margin: -28px -28px 20px -28px;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .summary-body {
+        color: #e0e0e0;
+    }
+
+    .order-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .item-name {
+        font-weight: 500;
+        font-size: 14px;
+        color: #f0f0f0;
+    }
+
+    .item-meta {
+        font-size: 12px;
+        color: #aaa;
+        margin-top: 2px;
+    }
+
+    .item-subtotal {
+        font-weight: 600;
+        color: #f0f0f0;
+        white-space: nowrap;
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        font-size: 14px;
+        color: #ccc;
+    }
+
+    .total-row {
+        font-size: 16px;
+        font-weight: 700;
+        color: #f0f0f0;
+    }
+
+    .total-amount {
+        color: #00e5b0;
+        font-size: 18px;
+    }
+</style>
+{% endblock %}

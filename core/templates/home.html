@@ -1,0 +1,752 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ══════════════════════════════════════════════════════
+     🔴 STICKY TOP OFFER BANNER
+══════════════════════════════════════════════════════ -->
+<div class="offer-banner" id="offerBanner">
+    <div class="offer-banner-inner">
+        <span class="offer-fire">🔥</span>
+        <span class="offer-text">
+            <strong>সীমিত অফার!</strong> PCMB + ICT Full Set মাত্র
+            <span class="offer-price">২,৯৯০ টাকা</span> — FREE HOME DELIVERY
+        </span>
+        <a href="#price-calculator" class="offer-cta-btn">দেখুন →</a>
+        <button class="offer-close" onclick="document.getElementById('offerBanner').style.display='none'">✕</button>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     ⏳ COUNTDOWN TIMER STRIP
+══════════════════════════════════════════════════════ -->
+<div class="countdown-strip">
+    <div class="container countdown-inner">
+        <span class="countdown-label">⏳ অফার শেষ হতে বাকি:</span>
+        <div class="timer-boxes">
+            <div class="timer-box"><span id="cd-days">00</span><small>দিন</small></div>
+            <div class="timer-sep">:</div>
+            <div class="timer-box"><span id="cd-hours">00</span><small>ঘণ্টা</small></div>
+            <div class="timer-sep">:</div>
+            <div class="timer-box"><span id="cd-mins">00</span><small>মিনিট</small></div>
+            <div class="timer-sep">:</div>
+            <div class="timer-box"><span id="cd-secs">00</span><small>সেকেন্ড</small></div>
+        </div>
+        <a href="https://wa.me/8801707591255?text=আমি%20অর্ডার%20করতে%20চাই" class="countdown-wa" target="_blank">
+            এখনই অর্ডার করুন 🚀
+        </a>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     🦸 HERO SECTION
+══════════════════════════════════════════════════════ -->
+<section class="hero">
+    <div class="hero-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <div class="container hero-inner">
+        <div class="hero-text">
+            <div class="eyebrow">
+                <span class="dot"></span>বাংলাদেশের #১ সার্ভিস<span class="dot"></span>
+            </div>
+            <h1 class="main-title">
+                SSC &amp; HSC<br>
+                <span class="shine-text">Practical<br>Khata</span>
+            </h1>
+            <ul class="feature-list">
+                <li><span class="icon">✍️</span> Professional হ্যান্ডরাইটিং</li>
+                <li><span class="icon">📐</span> Perfect ফিগার &amp; Diagrams</li>
+                <li><span class="icon">🚀</span> দ্রুত ডেলিভারি | Low Price</li>
+                <li><span class="icon">✅</span> 100% Neat &amp; Error-Free</li>
+            </ul>
+            <div class="hero-cta">
+                <a href="#price-calculator" class="cta-primary">
+                    <span>Price Calculator</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="https://wa.me/8801707591255" class="cta-whatsapp" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                    WhatsApp
+                </a>
+            </div>
+            <div class="stats-row">
+                <div class="stat"><span class="stat-num" data-count="500">0</span><span>+</span>
+                    <p>Students</p>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat"><span class="stat-num" data-count="9">0</span><span></span>
+                    <p>Subjects</p>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat"><span class="stat-num" data-count="100">0</span><span>%</span>
+                    <p>Satisfaction</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="book-wrapper">
+                <div class="book-glow"></div>
+                <img src="{% static 'images/khata.jpg' %}" alt="Practical Khata" class="book-img"
+                    onerror="this.style.display='none';document.getElementById('bookPlaceholder').style.display='flex'">
+                <div class="book-placeholder" id="bookPlaceholder" style="display:none;">
+                    <div class="book-mock">
+                        <div class="book-spine"></div>
+                        <div class="book-cover">
+                            <div class="book-title-mock">Practical<br>Khata</div>
+                            <div class="book-subject-tags">
+                                <span>Physics</span><span>Chemistry</span><span>Biology</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="float-badge badge-top">⭐ Top Rated</div>
+                <div class="float-badge badge-bottom">📦 Free Delivery</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-hint">
+        <div class="scroll-line"></div>
+        <span>scroll</span>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     📢 MARQUEE
+══════════════════════════════════════════════════════ -->
+<div class="marquee-strip">
+    <div class="marquee-track">
+        <span>✍️ Professional Handwriting</span><span class="mdot">•</span>
+        <span>📐 Perfect Diagrams</span><span class="mdot">•</span>
+        <span>🚀 Fast Delivery</span><span class="mdot">•</span>
+        <span>💰 Low Price</span><span class="mdot">•</span>
+        <span>🎓 SSC &amp; HSC</span><span class="mdot">•</span>
+        <span>🧪 Physics | Chemistry | Biology</span><span class="mdot">•</span>
+        <span>✍️ Professional Handwriting</span><span class="mdot">•</span>
+        <span>📐 Perfect Diagrams</span><span class="mdot">•</span>
+        <span>🚀 Fast Delivery</span><span class="mdot">•</span>
+        <span>💰 Low Price</span><span class="mdot">•</span>
+        <span>🎓 SSC &amp; HSC</span><span class="mdot">•</span>
+        <span>🧪 Physics | Chemistry | Biology</span><span class="mdot">•</span>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     💰 INTERACTIVE PRICE CALCULATOR
+══════════════════════════════════════════════════════ -->
+<section class="calc-section" id="price-calculator">
+    <div class="container">
+        <div class="section-head">
+            <p class="section-label">তোমার বাজেট জানো</p>
+            <h2 class="section-title">💰 Price Calculator</h2>
+            <div class="title-bar"></div>
+            <p class="section-sub">Subject বেছে নাও → দাম দেখো → WhatsApp এ Order করো!</p>
+        </div>
+
+        <!-- Best Value Bundle Card -->
+        <div class="special-offer-card">
+            <div class="soc-badge">🔥 BEST VALUE</div>
+            <div class="soc-content">
+                <div class="soc-left">
+                    <h3>PCMB + ICT Full Set</h3>
+                    <p>Drawing + Writing একসাথে • Board Standard • Quick Delivery</p>
+                    <div class="soc-includes">
+                        <span>✔ Physics ×2</span><span>✔ Chemistry ×2</span>
+                        <span>✔ Math ×2</span><span>✔ Biology ×2</span><span>✔ ICT</span>
+                    </div>
+                </div>
+                <div class="soc-right">
+                    <div class="soc-price">৳ ২,৯৯০</div>
+                    <div class="soc-save">🚚 FREE DELIVERY</div>
+                    <a href="https://wa.me/8801707591255?text=আমি%20PCMB%20+%20ICT%20Full%20Set%20অর্ডার%20করতে%20চাই।%20দাম:%20২,৯৯০%20টাকা"
+                        class="soc-btn" target="_blank">এখনই Order করুন</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="calc-grid">
+            <!-- Subject List -->
+            <div class="calc-left">
+                <h4 class="calc-sub-title">📝 Subject বেছে নাও</h4>
+                <div class="subject-list" id="subjectList">
+
+                    <label class="subject-item">
+                        <input type="checkbox" value="290" data-name="Physics 1st Paper">
+                        <div class="si-icon">⚡</div>
+                        <div class="si-info"><span class="si-name">Physics 1st Paper</span><span
+                                class="si-detail">Drawing + Writing</span></div>
+                        <div class="si-price">৳ ২৯০</div>
+                        <div class="si-check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                    </label>
+
+                    <label class="subject-item">
+                        <input type="checkbox" value="290" data-name="Physics 2nd Paper">
+                        <div class="si-icon">⚡</div>
+                        <div class="si-info"><span class="si-name">Physics 2nd Paper</span><span
+                                class="si-detail">Drawing + Writing</span></div>
+                        <div class="si-price">৳ ২৯০</div>
+                        <div class="si-check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                    </label>
+
+                    <label class="subject-item">
+                        <input type="checkbox" value="290" data-name="Chemistry 1st Paper">
+                        <div class="si-icon">🧪</div>
+                        <div class="si-info"><span class="si-name">Chemistry 1st Paper</span><span
+                                class="si-detail">Drawing + Writing</span></div>
+                        <div class="si-price">৳ ২৯০</div>
+                        <div class="si-check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                    </label>
+
+                    <label class="subject-item">
+                        <input type="checkbox" value="290" data-name="Chemistry 2nd Paper">
+                        <div class="si-icon">🧪</div>
+                        <div class="si-info"><span class="si-name">Chemistry 2nd Paper</span><span
+                                class="si-detail">Drawing + Writing</span></div>
+                        <div class="si-price">৳ ২৯০</div>
+                        <div class="si-check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                    </label>
+
+                    <label class="subject-item">
+                        <input type="checkbox" value="290" data-name="Math 1st Paper">
+                        <div class="si-icon">➗</div>
+                        <div class="si-info"><span class="si-name">Math 1st Paper</span><span class="si-detail">Drawing
+                                + Writing</span></div>
+                        <div class="si-price">৳ ২৯০</div>
+                        <div class="si-check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                    </label>
+
+                    <label class="subject-item">
+                        <input type="checkbox" value="290" data-name="Math 2nd Paper">
+                        <div class="si-icon">➗</div>
+                        <div class="si-info"><span class="si-name">Math 2nd Paper</span><span class="si-detail">Drawing
+                                + Writing</span></div>
+                        <div class="si-price">৳ ২৯০</div>
+                        <div class="si-check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                    </label>
+
+                    <label class="subject-item">
+                        <input type="checkbox" value="375" data-name="Biology 1st Paper">
+                        <div class="si-icon">🧬</div>
+                        <div class="si-info"><span class="si-name">Biology 1st Paper</span><span
+                                class="si-detail">Drawing + Writing</span></div>
+                        <div class="si-price">৳ ৩৭৫</div>
+                        <div class="si-check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                    </label>
+
+                    <label class="subject-item">
+                        <input type="checkbox" value="475" data-name="Biology 2nd Paper">
+                        <div class="si-icon">🧬</div>
+                        <div class="si-info"><span class="si-name">Biology 2nd Paper</span><span
+                                class="si-detail">Drawing + Writing</span></div>
+                        <div class="si-price">৳ ৪৭৫</div>
+                        <div class="si-check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                    </label>
+
+                    <label class="subject-item">
+                        <input type="checkbox" value="350" data-name="ICT">
+                        <div class="si-icon">💻</div>
+                        <div class="si-info"><span class="si-name">ICT</span><span class="si-detail">Drawing +
+                                Writing</span></div>
+                        <div class="si-price">৳ ৩৫০</div>
+                        <div class="si-check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                    </label>
+
+                </div>
+                <div class="calc-actions-row">
+                    <button class="select-all-btn" onclick="selectAllSubjects()">সব Select করো</button>
+                    <button class="clear-btn" onclick="clearAllSubjects()">Clear করো</button>
+                </div>
+            </div>
+
+            <!-- Bill Summary -->
+            <div class="calc-right">
+                <div class="bill-card">
+                    <div class="bill-header">
+                        <h4>🧾 আপনার Bill</h4>
+                        <span class="bill-count" id="billCount">০ টি subject</span>
+                    </div>
+                    <div class="bill-items" id="billItems">
+                        <div class="bill-empty">
+                            <div class="bill-empty-icon">📋</div>
+                            <p>কোনো subject select করোনি</p>
+                        </div>
+                    </div>
+                    <div class="bill-summary" id="billSummary" style="display:none;">
+                        <div class="bill-row"><span>Subtotal</span><span id="billSubtotal">৳ ০</span></div>
+                        <div class="bill-row delivery"><span>🚚 Delivery</span><span class="free-tag">FREE</span>
+                        </div>
+                        <div class="bill-divider"></div>
+                        <div class="bill-row total"><span>মোট</span><span id="billTotal" class="total-amount">৳ ০</span>
+                        </div>
+                    </div>
+                    <a href="#" class="order-wa-btn" id="orderWaBtn" target="_blank" style="display:none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                        </svg>
+                        WhatsApp এ Order করো
+                    </a>
+                    <div class="payment-note" id="paymentNote" style="display:none;">
+                        <div class="pn-title">💳 Payment পদ্ধতি</div>
+                        <div class="pn-methods">
+                            <div class="pn-method"><span class="pn-icon">📱</span>
+                                <div><strong>bKash</strong><span>01707591255</span></div>
+                            </div>
+                            <div class="pn-method"><span class="pn-icon">💚</span>
+                                <div><strong>Nagad</strong><span>01707591255</span></div>
+                            </div>
+                        </div>
+                        <p class="pn-steps">Send Money → Screenshot নাও → WhatsApp এ পাঠাও ✅</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     📚 FEATURED PRODUCTS
+══════════════════════════════════════════════════════ -->
+<section class="products-section">
+    <div class="container">
+        <div class="section-head">
+            <p class="section-label">আমাদের কালেকশন</p>
+            <h2 class="section-title">📚 Featured Products</h2>
+            <div class="title-bar"></div>
+        </div>
+        <div class="products-grid">
+            {% for product in featured_products %}
+            <div class="pcard" style="--delay:{{ forloop.counter0 }}00ms">
+                <div class="pcard-image">
+                    {% if product.image %}<img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+                    {% else %}<div class="pcard-image-placeholder"><span>📚</span></div>{% endif %}
+                    <div class="pcard-overlay">
+                        <a href="{% url 'add_to_cart' product.id %}" class="quick-add">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                                <line x1="3" y1="6" x2="21" y2="6" />
+                                <path d="M16 10a4 4 0 01-8 0" />
+                            </svg>
+                            কার্টে যোগ করুন
+                        </a>
+                    </div>
+                </div>
+                <div class="pcard-body">
+                    <div class="pcard-meta">
+                        <span class="level-badge">{{ product.level }}</span>
+                        <span class="category-tag">{{ product.category.name }}</span>
+                    </div>
+                    <h3 class="pcard-name">{{ product.name }}</h3>
+                    <div class="pcard-footer">
+                        <span class="pcard-price">৳{{ product.price }}</span>
+                        <a href="{% url 'add_to_cart' product.id %}" class="add-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <div class="empty-icon">📦</div>
+                <p>এখনো কোনো product নেই।</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="section-cta">
+            <a href="{% url 'products' %}" class="view-all-btn">
+                সব Products দেখুন
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     ✨ WHY CHOOSE US
+══════════════════════════════════════════════════════ -->
+<section class="why-section">
+    <div class="container">
+        <div class="section-head">
+            <p class="section-label">আমাদের বিশেষত্ব</p>
+            <h2 class="section-title">✨ কেন আমাদের নির্বাচন করবেন?</h2>
+            <div class="title-bar"></div>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card" style="--fc:#6366f1">
+                <div class="feature-icon-wrap">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                    </svg>
+                </div>
+                <h4>Professional হ্যান্ডরাইটিং</h4>
+                <p>Examiner-friendly, clear এবং neat writing।</p>
+            </div>
+            <div class="feature-card" style="--fc:#10b981">
+                <div class="feature-icon-wrap">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
+                </div>
+                <h4>Perfect ফিগার</h4>
+                <p>Accurate, labeled diagrams — textbook-quality।</p>
+            </div>
+            <div class="feature-card" style="--fc:#f59e0b">
+                <div class="feature-icon-wrap">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8">
+                        <rect x="1" y="3" width="15" height="13" />
+                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                        <circle cx="5.5" cy="18.5" r="2.5" />
+                        <circle cx="18.5" cy="18.5" r="2.5" />
+                    </svg>
+                </div>
+                <h4>দ্রুত ডেলিভারি</h4>
+                <p>সব জেলায় fast ও reliable delivery।</p>
+            </div>
+            <div class="feature-card" style="--fc:#ec4899">
+                <div class="feature-icon-wrap">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8">
+                        <line x1="12" y1="1" x2="12" y2="23" />
+                        <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+                    </svg>
+                </div>
+                <h4>Low Price গ্যারান্টি</h4>
+                <p>সবচেয়ে কম দামে সর্বোচ্চ মান।</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     💳 PAYMENT STEPS
+══════════════════════════════════════════════════════ -->
+<section class="payment-section">
+    <div class="container">
+        <div class="section-head">
+            <p class="section-label">সহজ পেমেন্ট</p>
+            <h2 class="section-title">💳 কীভাবে Payment করবেন?</h2>
+            <div class="title-bar"></div>
+        </div>
+        <div class="payment-steps-grid">
+            <div class="pay-step">
+                <div class="pay-step-num">১</div>
+                <div class="pay-step-icon">🧮</div>
+                <h4>Calculator এ Select করো</h4>
+                <p>উপরের Calculator থেকে subject বেছে নাও।</p>
+            </div>
+            <div class="pay-arrow">→</div>
+            <div class="pay-step">
+                <div class="pay-step-num">২</div>
+                <div class="pay-step-icon">📱</div>
+                <h4>bKash / Nagad</h4>
+                <div class="pay-numbers">
+                    <div class="pay-num-card bkash"><span>📱 bKash</span><strong>01707591255</strong></div>
+                    <div class="pay-num-card nagad"><span>💚 Nagad</span><strong>01707591255</strong></div>
+                </div>
+            </div>
+            <div class="pay-arrow">→</div>
+            <div class="pay-step">
+                <div class="pay-step-num">৩</div>
+                <div class="pay-step-icon">📸</div>
+                <h4>Screenshot পাঠাও</h4>
+                <p>Payment screenshot WhatsApp এ পাঠাও।</p>
+                <a href="https://wa.me/8801707591255" class="pay-wa-btn" target="_blank">WhatsApp করো →</a>
+            </div>
+            <div class="pay-arrow">→</div>
+            <div class="pay-step">
+                <div class="pay-step-num">৪</div>
+                <div class="pay-step-icon">✅</div>
+                <h4>Confirm &amp; Deliver!</h4>
+                <p>আমরা Confirm করে দ্রুত Khata পাঠাবো!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     ⭐ TESTIMONIALS
+══════════════════════════════════════════════════════ -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-head">
+            <p class="section-label">Real Reviews</p>
+            <h2 class="section-title">⭐ Students বলছে</h2>
+            <div class="title-bar"></div>
+        </div>
+        <div class="testimonials-grid">
+            <div class="tcard">
+                <div class="tcard-stars">★★★★★</div>
+                <p class="tcard-text">"অসাধারণ service! Biology khata এত সুন্দর হয়েছে যে আমার teacher ভেবেছিলেন
+                    printed। Highly recommended!"</p>
+                <div class="tcard-author">
+                    <div class="tcard-avatar">RA</div>
+                    <div><strong>Rafiul Alam</strong><span>HSC 2025, Dhaka</span></div>
+                </div>
+            </div>
+            <div class="tcard">
+                <div class="tcard-stars">★★★★★</div>
+                <p class="tcard-text">"Physics diagram গুলো perfect। Delivery অনেক fast। দাম অনেক কম অন্যদের
+                    তুলনায়। আবার নেবো।"</p>
+                <div class="tcard-author">
+                    <div class="tcard-avatar">TI</div>
+                    <div><strong>Tasnim Islam</strong><span>SSC 2025, Chittagong</span></div>
+                </div>
+            </div>
+            <div class="tcard">
+                <div class="tcard-stars">★★★★★</div>
+                <p class="tcard-text">"PCMB + ICT full set নিয়েছিলাম। সব subject এ perfect। আবার order করবো
+                    ইনশাআল্লাহ।"</p>
+                <div class="tcard-author">
+                    <div class="tcard-avatar">MH</div>
+                    <div><strong>Mehedi Hasan</strong><span>HSC 2025, Sylhet</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     ❓ FAQ
+══════════════════════════════════════════════════════ -->
+<section class="faq-section">
+    <div class="container">
+        <div class="section-head">
+            <p class="section-label">সাধারণ প্রশ্ন</p>
+            <h2 class="section-title">❓ FAQ</h2>
+            <div class="title-bar"></div>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)"><span>Delivery কতদিনে পাবো?</span><span
+                        class="faq-icon">+</span></button>
+                <div class="faq-a">Order confirm হওয়ার ৩-৫ কার্যদিবসে delivery। ঢাকায় ১-২ দিনে।</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)"><span>Payment আগে না পরে?</span><span
+                        class="faq-icon">+</span></button>
+                <div class="faq-a">Advance payment নিই। bKash/Nagad এ পাঠিয়ে screenshot WhatsApp এ দিলে কাজ শুরু।
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)"><span>Board standard format এ হবে?</span><span
+                        class="faq-icon">+</span></button>
+                <div class="faq-a">হ্যাঁ! সম্পূর্ণ Board standard format। Examiner-friendly handwriting ও accurate
+                    diagrams।</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)"><span>সারা বাংলাদেশে Delivery হয়?</span><span
+                        class="faq-icon">+</span></button>
+                <div class="faq-a">হ্যাঁ! সব জেলায় Courier service এ delivery হয়।</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)"><span>Delivery charge কত?</span><span
+                        class="faq-icon">+</span></button>
+                <div class="faq-a">এখন সম্পূর্ণ FREE HOME DELIVERY! কোনো extra charge নেই।</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     🚀 FINAL CTA BANNER
+══════════════════════════════════════════════════════ -->
+<section class="cta-banner">
+    <div class="cta-banner-bg">
+        <div class="cta-orb cta-orb-1"></div>
+        <div class="cta-orb cta-orb-2"></div>
+    </div>
+    <div class="container cta-banner-inner">
+        <div class="cta-text">
+            <h2>আজই অর্ডার করুন! 🎓</h2>
+            <p>হাজার হাজার student ইতিমধ্যে আমাদের service ব্যবহার করছে।<br>অফার সীমিত — দেরি করো না!</p>
+        </div>
+        <div class="cta-actions">
+            <a href="#price-calculator" class="cta-primary large">Price Calculate করো</a>
+            <a href="https://wa.me/8801707591255" class="cta-secondary large" target="_blank">💬 WhatsApp করুন</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/8801707591255" class="wa-float" target="_blank" title="Order করুন">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
+        <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+    <span class="wa-tooltip">Order করুন!</span>
+</a>
+
+
+<script>
+    // 1. COUNTDOWN TIMER
+    (function () {
+        const deadline = new Date('2026-06-15T23:59:59').getTime();
+        function update() {
+            const diff = deadline - Date.now();
+            if (diff <= 0) { document.querySelector('.countdown-strip').style.display = 'none'; return; }
+            const d = Math.floor(diff / 86400000), h = Math.floor((diff % 86400000) / 3600000),
+                m = Math.floor((diff % 3600000) / 60000), s = Math.floor((diff % 60000) / 1000);
+            document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+            document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+            document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+        }
+        update(); setInterval(update, 1000);
+    })();
+
+    // 2. PRICE CALCULATOR
+    (function () {
+        const cbs = document.querySelectorAll('#subjectList input[type=checkbox]');
+        function update() {
+            const sel = [...cbs].filter(c => c.checked);
+            const total = sel.reduce((s, c) => s + parseInt(c.value), 0);
+            cbs.forEach(cb => cb.closest('.subject-item').classList.toggle('selected', cb.checked));
+            document.getElementById('billCount').textContent = sel.length + ' টি subject';
+            if (!sel.length) {
+                document.getElementById('billItems').innerHTML = '<div class="bill-empty"><div class="bill-empty-icon">📋</div><p>কোনো subject select করোনি</p></div>';
+                ['billSummary', 'orderWaBtn', 'paymentNote'].forEach(id => document.getElementById(id).style.display = 'none');
+                return;
+            }
+            document.getElementById('billItems').innerHTML = sel.map(c => `<div class="bill-item-row"><span>${c.dataset.name}</span><span>৳ ${c.value}</span></div>`).join('');
+            document.getElementById('billSubtotal').textContent = '৳ ' + total.toLocaleString();
+            document.getElementById('billTotal').textContent = '৳ ' + total.toLocaleString();
+            document.getElementById('billSummary').style.display = 'block';
+            document.getElementById('orderWaBtn').style.display = 'flex';
+            document.getElementById('paymentNote').style.display = 'block';
+            const subjects = sel.map(c => `• ${c.dataset.name}: ৳${c.value}`).join('%0A');
+            const msg = `আসসালামু আলাইকুম!%0Aআমি order করতে চাই:%0A%0A${subjects}%0A%0Aমোট: ৳${total}%0AFREE Delivery চাই ✅`;
+            document.getElementById('orderWaBtn').href = `https://wa.me/8801707591255?text=${msg}`;
+        }
+        cbs.forEach(cb => cb.addEventListener('change', update));
+        update();
+    })();
+
+    window.selectAllSubjects = function () {
+        document.querySelectorAll('#subjectList input').forEach(c => { c.checked = true; });
+        document.querySelectorAll('#subjectList input')[0].dispatchEvent(new Event('change'));
+    };
+    window.clearAllSubjects = function () {
+        document.querySelectorAll('#subjectList input').forEach(c => { c.checked = false; });
+        document.querySelectorAll('#subjectList input')[0].dispatchEvent(new Event('change'));
+    };
+
+    // 3. FAQ TOGGLE
+    window.toggleFaq = function (btn) {
+        const item = btn.parentElement, isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-icon').textContent = '+'; });
+        if (!isOpen) { item.classList.add('open'); btn.querySelector('.faq-icon').textContent = '−'; }
+    };
+
+    // 4. STAT COUNTER
+    (function () {
+        const counters = document.querySelectorAll('.stat-num');
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                const el = e.target, target = +el.dataset.count;
+                let cur = 0; const step = Math.max(1, Math.ceil(target / 60));
+                const tick = () => { cur = Math.min(cur + step, target); el.textContent = cur; if (cur < target) requestAnimationFrame(tick); };
+                requestAnimationFrame(tick); io.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => io.observe(c));
+    })();
+
+    // 5. SCROLL REVEAL
+    (function () {
+        const els = document.querySelectorAll('.pcard,.feature-card,.tcard,.faq-item,.pay-step');
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        els.forEach(el => { el.classList.add('will-reveal'); io.observe(el); });
+    })();
+
+    // 6. NAVBAR SCROLL
+    window.addEventListener('scroll', () => {
+        document.querySelector('.navbar')?.classList.toggle('scrolled', scrollY > 40);
+    }, { passive: true });
+</script>
+
+{% endblock %}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SSC & HSC Practical Khata{% endblock %}</title>
+
+    <!-- Google Fonts: Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Noto+Sans+Bengali:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=5">
+
+    <style>
+        /* ── Global Font Override ── */
+        *,
+        body {
+            font-family: 'Roboto', 'Noto Sans Bengali', -apple-system, sans-serif !important;
+        }
+
+        /* ── Navbar ── */
+        .navbar {
+            background: rgba(7, 8, 15, 0.96) !important;
+            backdrop-filter: blur(20px) !important;
+            border-bottom: 1px solid rgba(91, 127, 255, 0.15) !important;
+            padding: 0.7rem 0 !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 1000 !important;
+            transition: padding 0.3s ease, box-shadow 0.3s ease !important;
+        }
+
+        .navbar.scrolled {
+            padding: 0.4rem 0 !important;
+            box-shadow: 0 4px 30px rgba(91, 127, 255, 0.25) !important;
+        }
+
+        .navbar-brand {
+            font-weight: 800 !important;
+            font-size: 1.1rem !important;
+            background: linear-gradient(135deg, #5b7fff, #00e5b0) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar-brand i {
+            -webkit-text-fill-color: #5b7fff !important;
+            font-size: 1rem;
+        }
+
+        .nav-link {
+            color: #9aa5c4 !important;
+            font-weight: 500 !important;
+            font-size: 0.88rem !important;
+            padding: 0.45rem 1rem !important;
+            border-radius: 8px !important;
+            transition: color 0.2s ease, background 0.2s ease !important;
+            letter-spacing: 0.2px;
+        }
+
+        .nav-link:hover {
+            color: #e8ecf4 !important;
+            background: rgba(91, 127, 255, 0.1) !important;
+        }
+
+        /* ── WhatsApp Float — Small & Clean ── */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 48px !important;
+            height: 48px !important;
+            border-radius: 50% !important;
+            background: linear-gradient(135deg, #25d366, #1da851) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 1.3rem !important;
+            color: white !important;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4) !important;
+            z-index: 999;
+            text-decoration: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) !important;
+            box-shadow: 0 6px 28px rgba(37, 211, 102, 0.6) !important;
+            color: white !important;
+        }
+
+        /* ── Product Card Image ── */
+        .product-card .card-img-top,
+        .card-img-top {
+            width: 100% !important;
+            height: 190px !important;
+            object-fit: cover !important;
+            object-position: center top !important;
+            display: block !important;
+            border-radius: 14px 14px 0 0 !important;
+            transition: transform 0.5s ease !important;
+        }
+
+        .product-card:hover .card-img-top {
+            transform: scale(1.05) !important;
+        }
+
+        /* ── Card text sizes ── */
+        .card-title {
+            font-size: 0.95rem !important;
+            font-weight: 700 !important;
+        }
+
+        .card-text {
+            font-size: 0.82rem !important;
+            color: #6b7a99 !important;
+        }
+
+        h4.text-success,
+        .text-success {
+            font-size: 1.05rem !important;
+            font-weight: 800 !important;
+        }
+
+        .badge {
+            font-size: 0.7rem !important;
+            padding: 4px 10px !important;
+        }
+
+        .btn {
+            font-size: 0.875rem !important;
+            font-weight: 600 !important;
+        }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.07) !important;
+            background: rgba(7, 8, 15, 0.98) !important;
+        }
+
+        footer p {
+            font-size: 0.82rem !important;
+            color: #6b7a99 !important;
+        }
+    </style>
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <div class="particles-bg"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <i class="fas fa-book-open"></i><span>Practical Khata</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">হোম</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'products' %}">খাতা</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" href="{% url 'cart' %}">
+                            <i class="fas fa-shopping-bag" style="font-size:0.9rem;"></i> কার্ট
+                            {% if cart_count and cart_count > 0 %}
+                            <span style="
+                background: linear-gradient(135deg,#f472b6,#ec4899);
+                color:white; font-size:0.65rem; font-weight:700;
+                padding:1px 6px; border-radius:10px; line-height:1.6;
+              ">{{ cart_count }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+        <div class="alert alert-dismissible fade show" style="
+      background: rgba(91,127,255,0.1);
+      border: 1px solid rgba(91,127,255,0.3);
+      color: #8ba4ff;
+      border-radius: 10px;
+      font-size: 0.875rem;
+    ">
+            {{ message }}
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    <!-- WhatsApp Float — Small & Clean -->
+    <a href="https://wa.me/01707591255" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="mt-5 py-4">
+        <div class="container text-center">
+            <p class="mb-1">© 2026 SSC & HSC Practical Khata</p>
+            <p class="mb-0"><i class="fab fa-whatsapp" style="color:#25d366;"></i> 01707591255</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% load static %}
+    <script src="{% static 'js/animations.js' %}?v=5"></script>
+    <script src="{% static 'js/cart.js' %}?v=5"></script>
+
+    <script>
+        // Navbar scroll shrink
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').classList.toggle('scrolled', scrollY > 40);
+        }, { passive: true });
+
+        // Image smooth load
+        document.querySelectorAll('img').forEach(img => {
+            if (img.complete) img.style.opacity = 1;
+            else img.onload = () => { img.style.opacity = 1; };
+            img.style.transition = 'opacity 0.4s ease';
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Manage Products{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>🛠️ পণ্য ম্যানেজ করুন</h2>
+            <a href="{% url 'add_product' %}" class="btn btn-success">+ নতুন পণ্য যোগ করুন</a>
+        </div>
+
+        {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-info alert-dismissible fade show">
+            {{ msg }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle rounded">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>ছবি</th>
+                        <th>নাম</th>
+                        <th>Level</th>
+                        <th>ক্যাটাগরি</th>
+                        <th>দাম</th>
+                        <th>Stock</th>
+                        <th>Featured</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>
+                            {% if product.image %}
+                            <img src="{{ product.image.url }}" width="48" height="48"
+                                style="object-fit:cover;border-radius:6px;">
+                            {% else %}
+                            <span class="text-muted">—</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ product.name }}</td>
+                        <td><span class="badge bg-primary">{{ product.level }}</span></td>
+                        <td>{{ product.category.name|default:"—" }}</td>
+                        <td>৳{{ product.price }}</td>
+                        <td>
+                            {% if product.stock > 0 %}
+                            <span class="text-success fw-bold">{{ product.stock }}</span>
+                            {% else %}
+                            <span class="text-danger">0</span>
+                            {% endif %}
+                        </td>
+                        <td>{% if product.featured %}✅{% else %}<span class="text-muted">—</span>{% endif %}</td>
+                        <td>
+                            <a href="{% url 'product_detail' product.slug %}" class="btn btn-sm btn-outline-info me-1"
+                                target="_blank">👁</a>
+                            <form method="POST" action="{% url 'delete_product' product.id %}" style="display:inline;"
+                                onsubmit="return confirm('{{ product.name }} মুছে ফেলবেন?')">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-outline-danger">🗑</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-4">কোনো পণ্য নেই — নতুন পণ্য যোগ করুন</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-muted mt-2" style="font-size:13px;">
+            মোট পণ্য: <strong>{{ products|length }}</strong> |
+            <a href="/admin/" class="text-muted">Full Admin →</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

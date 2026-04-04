@@ -1,0 +1,433 @@
+{% extends 'base.html' %}
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container" style="max-width:1000px;">
+
+        <div class="cart-page-header mb-4">
+            <h2 class="cart-heading"><i class="fas fa-shopping-bag"></i> Your Cart
+                <span class="cart-count-pill">{{ cart|length }} item{% if cart|length != 1 %}s{% endif %}</span>
+            </h2>
+        </div>
+
+        {% if cart %}
+        <div class="row g-4">
+
+            <!-- CART ITEMS -->
+            <div class="col-lg-8">
+                {% for pid, item in cart.items %}
+                <div class="cart-item-row cart-item-animated" data-product-id="{{ pid }}">
+
+                    <!-- Image -->
+                    <div class="ci-img-wrap">
+                        {% if item.image %}
+                        <img src="{{ item.image }}" alt="{{ item.name }}" class="ci-img loaded">
+                        {% else %}
+                        <div class="ci-img-placeholder">📦</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Info -->
+                    <div class="ci-info">
+                        <div class="ci-name">{{ item.name }}</div>
+                        <div class="ci-price-unit">Unit price: <strong>৳{{ item.price }}</strong></div>
+
+                        <div class="ci-qty-row">
+                            <button class="qty-btn qty-decrease" data-product-id="{{ pid }}">−</button>
+                            <span class="qty-num">{{ item.quantity }}</span>
+                            <button class="qty-btn qty-increase" data-product-id="{{ pid }}">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Subtotal + Remove -->
+                    <div class="ci-actions">
+                        <div class="ci-subtotal">৳{{ item.subtotal }}</div>
+                        <a href="{% url 'remove_from_cart' pid %}" class="ci-remove remove-item-btn">
+                            <i class="fas fa-trash-alt"></i> Remove
+                        </a>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- ORDER SUMMARY -->
+            <div class="col-lg-4">
+                <div class="summary-box">
+                    <div class="summary-title">Order Summary</div>
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>৳{{ total }}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery</span>
+                        <span class="text-success-soft">Free 🎉</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-total-row">
+                        <span>Total</span>
+                        <span class="summary-total-amt">৳{{ total|add:110 }}</span>
+                    </div>
+                    <div class="summary-note">🚚 Delivery charge ৳110 included</div>
+                    <a href="{% url 'checkout' %}" class="summary-checkout-btn">
+                        <i class="fas fa-bolt"></i> Checkout Now
+                    </a>
+                    <a href="{% url 'products' %}" class="summary-continue-link">← Continue Shopping</a>
+                </div>
+            </div>
+
+        </div>
+
+        {% else %}
+        <!-- EMPTY CART -->
+        <div class="empty-cart-wrap">
+            <div class="empty-cart-icon">🛒</div>
+            <h3>Your cart is empty</h3>
+            <p>Looks like you haven't added anything yet.</p>
+            <a href="{% url 'products' %}" class="btn btn-primary px-5 py-3">Browse Products</a>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+<style>
+    /* ── Cart Page Header ── */
+    .cart-heading {
+        font-size: 1.6rem !important;
+        font-weight: 700 !important;
+        color: #e8ecf4;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .cart-count-pill {
+        font-size: 0.8rem;
+        background: rgba(91, 127, 255, 0.18);
+        border: 1px solid rgba(91, 127, 255, 0.35);
+        color: #8ba4ff;
+        padding: 3px 12px;
+        border-radius: 20px;
+        font-weight: 500;
+    }
+
+    /* ── Cart Item Row ── */
+    .cart-item-row {
+        display: grid;
+        grid-template-columns: 80px 1fr auto;
+        gap: 16px;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 14px;
+        padding: 16px;
+        margin-bottom: 12px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cart-item-row:hover {
+        border-color: rgba(91, 127, 255, 0.35);
+        box-shadow: 0 4px 20px rgba(91, 127, 255, 0.12);
+    }
+
+    .cart-item-animated {
+        animation: slideUp 0.4s ease both;
+    }
+
+    .cart-item-row:nth-child(1) {
+        animation-delay: 0.05s;
+    }
+
+    .cart-item-row:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+    .cart-item-row:nth-child(3) {
+        animation-delay: 0.15s;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ── Cart Item Image ── */
+    .ci-img-wrap {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        overflow: hidden;
+        flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .ci-img {
+        width: 80px !important;
+        height: 80px !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        border-radius: 10px;
+        display: block;
+        transition: transform 0.4s ease;
+    }
+
+    .cart-item-row:hover .ci-img {
+        transform: scale(1.06);
+    }
+
+    .ci-img-placeholder {
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        background: rgba(91, 127, 255, 0.08);
+        border-radius: 10px;
+    }
+
+    /* ── Cart Item Info ── */
+    .ci-info {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .ci-name {
+        font-weight: 600;
+        font-size: 0.95rem !important;
+        color: #e8ecf4;
+        line-height: 1.4;
+    }
+
+    .ci-price-unit {
+        font-size: 0.8rem !important;
+        color: #6b7a99;
+    }
+
+    .ci-price-unit strong {
+        color: #a0aec0;
+    }
+
+    /* Qty Controls */
+    .ci-qty-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    .qty-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1px solid rgba(91, 127, 255, 0.4);
+        background: rgba(91, 127, 255, 0.1);
+        color: #8ba4ff;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        line-height: 1;
+    }
+
+    .qty-btn:hover {
+        background: rgba(91, 127, 255, 0.3);
+        border-color: #5b7fff;
+        color: white;
+        transform: scale(1.1);
+    }
+
+    .qty-num {
+        font-weight: 700;
+        font-size: 0.95rem !important;
+        color: #e8ecf4;
+        min-width: 20px;
+        text-align: center;
+    }
+
+    /* ── Cart Item Actions ── */
+    .ci-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+    }
+
+    .ci-subtotal {
+        font-weight: 700;
+        font-size: 1rem !important;
+        color: #00e5b0;
+    }
+
+    .ci-remove {
+        font-size: 0.78rem !important;
+        color: #f472b6;
+        border: 1px solid rgba(244, 114, 182, 0.3);
+        border-radius: 8px;
+        padding: 4px 10px;
+        background: rgba(244, 114, 182, 0.06);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        white-space: nowrap;
+    }
+
+    .ci-remove:hover {
+        background: rgba(244, 114, 182, 0.15);
+        border-color: #f472b6;
+        color: #f472b6;
+        transform: scale(1.04);
+    }
+
+    /* ── Order Summary Box ── */
+    .summary-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 24px;
+        position: sticky;
+        top: 80px;
+    }
+
+    .summary-title {
+        font-size: 1rem !important;
+        font-weight: 700;
+        color: #e8ecf4;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.875rem !important;
+        color: #9aa5c4;
+        margin-bottom: 10px;
+    }
+
+    .text-success-soft {
+        color: #00e5b0;
+        font-weight: 600;
+    }
+
+    .summary-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.07);
+        margin: 14px 0;
+    }
+
+    .summary-total-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+        font-size: 0.95rem !important;
+        font-weight: 600;
+        color: #e8ecf4;
+    }
+
+    .summary-total-amt {
+        font-size: 1.3rem !important;
+        font-weight: 800;
+        background: linear-gradient(135deg, #00e5b0, #5b7fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .summary-note {
+        font-size: 0.75rem !important;
+        color: #6b7a99;
+        margin-bottom: 18px;
+        text-align: center;
+    }
+
+    .summary-checkout-btn {
+        display: block;
+        width: 100%;
+        padding: 13px;
+        text-align: center;
+        background: linear-gradient(135deg, #5b7fff, #7c3aed);
+        color: white;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 0.95rem !important;
+        text-decoration: none;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        letter-spacing: 0.3px;
+    }
+
+    .summary-checkout-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(91, 127, 255, 0.4);
+        color: white;
+    }
+
+    .summary-continue-link {
+        display: block;
+        text-align: center;
+        font-size: 0.8rem !important;
+        color: #6b7a99;
+        margin-top: 14px;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .summary-continue-link:hover {
+        color: #8ba4ff;
+    }
+
+    /* ── Empty Cart ── */
+    .empty-cart-wrap {
+        text-align: center;
+        padding: 80px 20px;
+    }
+
+    .empty-cart-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        filter: grayscale(0.3);
+    }
+
+    .empty-cart-wrap h3 {
+        font-size: 1.4rem !important;
+        color: #e8ecf4;
+        margin-bottom: 8px;
+    }
+
+    .empty-cart-wrap p {
+        color: #6b7a99;
+        font-size: 0.9rem !important;
+        margin-bottom: 28px;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 576px) {
+        .cart-item-row {
+            grid-template-columns: 64px 1fr;
+        }
+
+        .ci-actions {
+            grid-column: 1 / -1;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+</style>
+{% endblock %}
