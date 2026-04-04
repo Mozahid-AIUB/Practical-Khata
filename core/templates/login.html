@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container" style="max-width:420px;">
+        <div class="auth-card">
+            <div class="auth-logo">📚</div>
+            <h2 class="auth-title">Welcome back</h2>
+            <p class="auth-sub">লগইন করে অর্ডার track করো</p>
+
+            {% if messages %}{% for msg in messages %}
+            <div class="auth-alert">{{ msg }}</div>
+            {% endfor %}{% endif %}
+
+            <div style="margin-top:24px;">
+                <label class="auth-label">Username</label>
+                <input type="text" name="username" id="username" class="auth-input" placeholder="তোমার username"
+                    autocomplete="username">
+
+                <label class="auth-label" style="margin-top:16px;">Password</label>
+                <input type="password" name="password" id="password" class="auth-input" placeholder="••••••••"
+                    autocomplete="current-password">
+
+                <button onclick="doLogin()" class="auth-btn">Login করো</button>
+
+                <div style="text-align:center; margin-top:16px;">
+                    <a href="{% url 'register' %}" style="font-size:0.82rem; color:#6b7a99;">Account নেই? <span
+                            style="color:#5b7fff;">Register করো</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function doLogin() {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '';
+        const csrf = document.createElement('input');
+        csrf.type = 'hidden'; csrf.name = 'csrfmiddlewaretoken';
+        csrf.value = '{{ csrf_token }}';
+        const u = document.createElement('input');
+        u.type = 'hidden'; u.name = 'username';
+        u.value = document.getElementById('username').value;
+        const p = document.createElement('input');
+        p.type = 'hidden'; p.name = 'password';
+        p.value = document.getElementById('password').value;
+        form.appendChild(csrf); form.appendChild(u); form.appendChild(p);
+        document.body.appendChild(form); form.submit();
+    }
+    document.getElementById('password').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+</script>
+{% endblock %}

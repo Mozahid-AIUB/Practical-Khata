@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block title %}Manage Coupons{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container" style="max-width:800px;">
+
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 style="font-size:1.2rem !important; font-weight:700 !important; color:#e8ecf4; margin:0;">🎟️ Coupon
+                Codes</h2>
+        </div>
+
+        <!-- Add Coupon Form -->
+        <div class="coupon-form-card">
+            <div class="coupon-form-title">নতুন Coupon তৈরি করো</div>
+            <form method="POST" action="{% url 'add_coupon' %}">
+                {% csrf_token %}
+                <div class="coupon-form-grid">
+                    <div>
+                        <label class="auth-label">Code</label>
+                        <input type="text" name="code" class="auth-input" placeholder="FIRST10" required
+                            style="text-transform:uppercase;">
+                    </div>
+                    <div>
+                        <label class="auth-label">Type</label>
+                        <select name="discount_type" class="auth-input">
+                            <option value="percent">Percent (%)</option>
+                            <option value="flat">Flat (৳)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="auth-label">Value</label>
+                        <input type="number" name="discount_value" class="auth-input" placeholder="10" required min="1">
+                    </div>
+                    <div>
+                        <label class="auth-label">Min Order (৳)</label>
+                        <input type="number" name="min_order" class="auth-input" placeholder="0" value="0">
+                    </div>
+                    <div>
+                        <label class="auth-label">Max Uses</label>
+                        <input type="number" name="max_uses" class="auth-input" placeholder="100" value="100">
+                    </div>
+                    <div>
+                        <label class="auth-label">Expires in (days)</label>
+                        <input type="number" name="expires_days" class="auth-input" placeholder="30 (blank = never)">
+                    </div>
+                </div>
+                <button type="submit" class="auth-btn" style="margin-top:16px;">Coupon তৈরি করো</button>
+            </form>
+        </div>
+
+        <!-- Coupon List -->
+        {% if messages %}{% for msg in messages %}<div class="auth-alert">{{ msg }}</div>{% endfor %}{% endif %}
+
+        {% for coupon in coupons %}
+        <div class="coup-card {% if not coupon.active %}coup-inactive{% endif %}">
+            <div class="coup-left">
+                <div class="coup-code">{{ coupon.code }}</div>
+                <div class="coup-meta">
+                    <span class="coup-value">{{ coupon.discount_value }}{% if coupon.discount_type == 'percent' %}%{%
+                        else %}৳{% endif %} off</span>
+                    <span class="coup-used">{{ coupon.used_count }}/{{ coupon.max_uses }} used</span>
+                    {% if coupon.min_order %}<span class="coup-min">Min ৳{{ coupon.min_order|floatformat:0 }}</span>{%
+                    endif %}
+                    {% if coupon.expires_at %}<span class="coup-exp">Expires {{ coupon.expires_at|date:"d M Y"
+                        }}</span>{% endif %}
+                </div>
+            </div>
+            <form method="POST" action="{% url 'delete_coupon' coupon.id %}" onsubmit="return confirm('Delete?')">
+                {% csrf_token %}
+                <button type="submit" class="coup-delete-btn">Delete</button>
+            </form>
+        </div>
+        {% empty %}
+        <p style="color:#6b7a99; text-align:center; padding:32px;">কোনো coupon নেই।</p>
+        {% endfor %}
+
+    </div>
+</section>
+
+<style>
+    .coupon-form-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(91, 127, 255, 0.2);
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 24px;
+    }
+
+    .coupon-form-title {
+        font-size: 0.85rem !important;
+        font-weight: 700;
+        color: #8ba4ff;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .coupon-form-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    .coup-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .coup-inactive {
+        opacity: 0.5;
+    }
+
+    .coup-code {
+        font-size: 1rem !important;
+        font-weight: 800;
+        color: #00e5b0;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+    }
+
+    .coup-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .coup-value,
+    .coup-used,
+    .coup-min,
+    .coup-exp {
+        font-size: 0.75rem !important;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 6px;
+        padding: 2px 8px;
+        color: #9aa5c4;
+    }
+
+    .coup-delete-btn {
+        font-size: 0.78rem;
+        background: rgba(244, 114, 182, 0.08);
+        border: 1px solid rgba(244, 114, 182, 0.25);
+        color: #f472b6;
+        border-radius: 8px;
+        padding: 5px 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .coup-delete-btn:hover {
+        background: rgba(244, 114, 182, 0.15);
+    }
+
+    @media (max-width:576px) {
+        .coupon-form-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+</style>
+{% endblock %}

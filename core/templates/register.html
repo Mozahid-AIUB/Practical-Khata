@@ -1,0 +1,35 @@
+<!-- ════ register.html ════ -->
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container" style="max-width:420px;">
+        <div class="auth-card">
+            <div class="auth-logo">🎓</div>
+            <h2 class="auth-title">Account তৈরি করো</h2>
+            <p class="auth-sub">Order history ও tracking এর জন্য</p>
+
+            {% if messages %}{% for msg in messages %}
+            <div class="auth-alert">{{ msg }}</div>
+            {% endfor %}{% endif %}
+
+            <form method="POST" style="margin-top:24px;">
+                {% csrf_token %}
+                <label class="auth-label">Username</label>
+                <input type="text" name="username" class="auth-input" placeholder="তোমার username" required>
+                <label class="auth-label" style="margin-top:14px;">Email (optional)</label>
+                <input type="email" name="email" class="auth-input" placeholder="email@example.com">
+                <label class="auth-label" style="margin-top:14px;">Password</label>
+                <input type="password" name="password" class="auth-input" placeholder="••••••••" required>
+                <label class="auth-label" style="margin-top:14px;">Confirm Password</label>
+                <input type="password" name="password2" class="auth-input" placeholder="••••••••" required>
+                <button type="submit" class="auth-btn">Register করো</button>
+                <div style="text-align:center; margin-top:16px;">
+                    <a href="{% url 'login' %}" style="font-size:0.82rem; color:#6b7a99;">আগেই account আছে? <span
+                            style="color:#5b7fff;">Login করো</span></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

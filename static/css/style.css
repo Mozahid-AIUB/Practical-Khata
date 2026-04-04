@@ -3073,3 +3073,98 @@ h4.text-success {
         letter-spacing: -1px !important;
     }
 }
+
+/* ═══════════════════════════════════════════
+   AUTH CSS PATCH — style.css এর শেষে paste করো
+   ═══════════════════════════════════════════ */
+
+/* Auth Card */
+.auth-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 32px;
+    text-align: center;
+}
+
+.auth-logo {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.auth-title {
+    font-size: 1.3rem !important;
+    font-weight: 800 !important;
+    color: #e8ecf4;
+    margin-bottom: 4px;
+}
+
+.auth-sub {
+    font-size: 0.82rem !important;
+    color: #6b7a99;
+}
+
+.auth-label {
+    display: block;
+    text-align: left;
+    font-size: 0.8rem !important;
+    color: #6b7a99;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.auth-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #e8ecf4;
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    display: block;
+}
+
+.auth-input:focus {
+    border-color: #5b7fff;
+    box-shadow: 0 0 0 3px rgba(91, 127, 255, 0.15);
+}
+
+.auth-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: linear-gradient(135deg, #5b7fff, #7c3aed);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.95rem !important;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(91, 127, 255, 0.4);
+}
+
+.auth-alert {
+    background: rgba(244, 114, 182, 0.1);
+    border: 1px solid rgba(244, 114, 182, 0.3);
+    color: #f472b6;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.82rem !important;
+    margin-top: 12px;
+    text-align: left;
+}
+
+/* Navbar login/register links */
+.nav-link[href*="login"],
+.nav-link[href*="register"],
+.nav-link[href*="dashboard"] {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}

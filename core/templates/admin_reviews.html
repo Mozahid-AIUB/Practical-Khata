@@ -1,0 +1,117 @@
+<!-- ════ admin_reviews.html ════ -->
+{% extends 'base.html' %}
+{% block title %}Admin — Reviews{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container" style="max-width:800px;">
+        <h2 style="font-size:1.2rem !important; font-weight:700 !important; color:#e8ecf4; margin-bottom:20px;">⭐ সব
+            Reviews</h2>
+        {% for review in reviews %}
+        <div class="rev-card {% if not review.approved %}rev-pending{% endif %}">
+            <div class="rev-top">
+                <div>
+                    <span class="rev-name">{{ review.name }}</span>
+                    <span class="rev-product">→ {{ review.product.name }}</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="rev-stars">{{ review.rating }}★</span>
+                    <span class="rev-date">{{ review.created_at|date:"d M" }}</span>
+                    {% if not review.approved %}<span class="rev-badge">Pending</span>{% endif %}
+                </div>
+            </div>
+            <p class="rev-comment">{{ review.comment }}</p>
+            <form method="POST" action="{% url 'approve_review' review.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="rev-approve-btn {% if review.approved %}approved{% endif %}">
+                    {% if review.approved %}✅ Approved{% else %}Approve করো{% endif %}
+                </button>
+            </form>
+        </div>
+        {% empty %}
+        <p style="color:#6b7a99; text-align:center; padding:40px;">কোনো review নেই।</p>
+        {% endfor %}
+    </div>
+</section>
+<style>
+    .rev-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 10px;
+    }
+
+    .rev-pending {
+        border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    .rev-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .rev-name {
+        font-weight: 700;
+        color: #e8ecf4;
+        font-size: 0.9rem !important;
+    }
+
+    .rev-product {
+        font-size: 0.8rem !important;
+        color: #6b7a99;
+        margin-left: 6px;
+    }
+
+    .rev-stars {
+        color: #f59e0b;
+        font-weight: 700;
+        font-size: 0.9rem !important;
+    }
+
+    .rev-date {
+        font-size: 0.75rem !important;
+        color: #6b7a99;
+    }
+
+    .rev-badge {
+        font-size: 0.7rem;
+        background: rgba(245, 158, 11, 0.15);
+        color: #f59e0b;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    .rev-comment {
+        font-size: 0.875rem !important;
+        color: #9aa5c4;
+        margin-bottom: 12px;
+        line-height: 1.6;
+    }
+
+    .rev-approve-btn {
+        font-size: 0.8rem;
+        background: rgba(91, 127, 255, 0.1);
+        border: 1px solid rgba(91, 127, 255, 0.3);
+        color: #8ba4ff;
+        border-radius: 8px;
+        padding: 5px 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .rev-approve-btn:hover {
+        background: rgba(91, 127, 255, 0.2);
+    }
+
+    .rev-approve-btn.approved {
+        background: rgba(0, 229, 176, 0.1);
+        border-color: rgba(0, 229, 176, 0.3);
+        color: #00e5b0;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+{% block title %}Admin — Orders{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+
+        <!-- Stats -->
+        <div class="ao-stats-row">
+            <div class="ao-stat">
+                <div class="ao-stat-num">{{ orders|length }}</div>
+                <div class="ao-stat-label">Filtered Orders</div>
+            </div>
+            <div class="ao-stat">
+                <div class="ao-stat-num" style="color:#f59e0b;">{{ pending_count }}</div>
+                <div class="ao-stat-label">Pending</div>
+            </div>
+            <div class="ao-stat">
+                <div class="ao-stat-num" style="color:#00e5b0;">{{ today_orders }}</div>
+                <div class="ao-stat-label">Today</div>
+            </div>
+            <div class="ao-stat">
+                <div class="ao-stat-num" style="color:#5b7fff;">৳{{ total_revenue|floatformat:0 }}</div>
+                <div class="ao-stat-label">Total Revenue</div>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+            <h2 style="font-size:1.2rem !important; font-weight:700 !important; color:#e8ecf4; margin:0;">📋 সব Orders
+            </h2>
+            <!-- Filter -->
+            <div class="ao-filters">
+                <a href="{% url 'admin_orders' %}"
+                    class="ao-filter-btn {% if not status_filter %}active{% endif %}">All</a>
+                {% for val, label in status_choices %}
+                <a href="?status={{ val }}" class="ao-filter-btn {% if status_filter == val %}active{% endif %}">{{
+                    label }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% for order in orders %}
+        <div class="ao-card">
+            <div class="ao-card-top">
+                <div>
+                    <span class="ao-order-id">#{{ order.id }}</span>
+                    <span class="ao-name">{{ order.customer_name }}</span>
+                    <span class="ao-phone">{{ order.phone }}</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="dao-status status-{{ order.status }}">{{ order.get_status_display }}</span>
+                    <span class="ao-date">{{ order.created_at|date:"d M, H:i" }}</span>
+                </div>
+            </div>
+
+            <div class="ao-items-row">
+                {% for item in order.items.all %}
+                <span class="dao-item-tag">{{ item.product.name }} ×{{ item.quantity }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="ao-address">📍 {{ order.address }}</div>
+
+            <div class="ao-card-footer">
+                <div class="ao-total">৳{{ order.final_amount|floatformat:0 }}
+                    {% if order.discount %}<span class="ao-discount">−৳{{ order.discount|floatformat:0 }}
+                        discount</span>{% endif %}
+                </div>
+                <!-- Status Update Form -->
+                <form method="POST" action="{% url 'update_order_status' order.id %}" class="ao-update-form">
+                    {% csrf_token %}
+                    <select name="status" class="ao-select">
+                        {% for val, label in status_choices %}
+                        <option value="{{ val }}" {% if order.status==val %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" name="tracking_note" value="{{ order.tracking_note }}" class="ao-note-input"
+                        placeholder="Note (optional)">
+                    <button type="submit" class="ao-update-btn">Update</button>
+                    <a href="{% url 'order_tracking' order.id %}" class="ao-track-link" target="_blank">Tracking →</a>
+                </form>
+            </div>
+        </div>
+        {% empty %}
+        <div style="text-align:center; padding:48px; color:#6b7a99;">কোনো order নেই।</div>
+        {% endfor %}
+
+    </div>
+</section>
+
+<style>
+    .ao-stats-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .ao-stat {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+    }
+
+    .ao-stat-num {
+        font-size: 1.4rem !important;
+        font-weight: 900 !important;
+        color: #e8ecf4;
+    }
+
+    .ao-stat-label {
+        font-size: 0.75rem !important;
+        color: #6b7a99;
+        margin-top: 4px;
+    }
+
+    .ao-filters {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .ao-filter-btn {
+        font-size: 0.75rem;
+        padding: 5px 12px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #6b7a99;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+
+    .ao-filter-btn:hover,
+    .ao-filter-btn.active {
+        background: rgba(91, 127, 255, 0.15);
+        border-color: #5b7fff;
+        color: #8ba4ff;
+    }
+
+    .ao-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 10px;
+    }
+
+    .ao-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    .ao-order-id {
+        font-weight: 800;
+        color: #8ba4ff;
+        font-size: 0.9rem !important;
+        margin-right: 10px;
+    }
+
+    .ao-name {
+        font-weight: 600;
+        color: #e8ecf4;
+        font-size: 0.875rem !important;
+        margin-right: 8px;
+    }
+
+    .ao-phone {
+        font-size: 0.8rem !important;
+        color: #6b7a99;
+    }
+
+    .ao-date {
+        font-size: 0.75rem !important;
+        color: #6b7a99;
+    }
+
+    .ao-items-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+
+    .ao-address {
+        font-size: 0.8rem !important;
+        color: #6b7a99;
+        margin-bottom: 12px;
+    }
+
+    .ao-card-footer {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .ao-total {
+        font-weight: 800;
+        color: #00e5b0;
+        font-size: 1rem !important;
+    }
+
+    .ao-discount {
+        font-size: 0.75rem;
+        color: #f472b6;
+        margin-left: 6px;
+    }
+
+    .ao-update-form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-left: auto;
+    }
+
+    .ao-select {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #e8ecf4;
+        font-size: 0.8rem;
+        padding: 5px 8px;
+    }
+
+    .ao-note-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #e8ecf4;
+        font-size: 0.8rem;
+        padding: 5px 10px;
+        width: 160px;
+    }
+
+    .ao-update-btn {
+        background: linear-gradient(135deg, #5b7fff, #7c3aed);
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 6px 14px;
+        cursor: pointer;
+    }
+
+    .ao-track-link {
+        font-size: 0.78rem;
+        color: #5b7fff;
+        text-decoration: none;
+    }
+
+    /* reuse dao-status */
+    .dao-status {
+        font-size: 0.72rem !important;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 20px;
+        text-transform: capitalize;
+    }
+
+    .status-pending {
+        background: rgba(245, 158, 11, 0.15);
+        color: #f59e0b;
+    }
+
+    .status-confirmed {
+        background: rgba(91, 127, 255, 0.15);
+        color: #8ba4ff;
+    }
+
+    .status-processing {
+        background: rgba(167, 139, 250, 0.15);
+        color: #a78bfa;
+    }
+
+    .status-dispatched {
+        background: rgba(0, 229, 176, 0.15);
+        color: #00e5b0;
+    }
+
+    .status-delivered {
+        background: rgba(0, 255, 135, 0.15);
+        color: #00ff87;
+    }
+
+    .status-cancelled {
+        background: rgba(244, 114, 182, 0.15);
+        color: #f472b6;
+    }
+
+    @media (max-width:576px) {
+        .ao-stats-row {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .ao-update-form {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .ao-note-input {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
