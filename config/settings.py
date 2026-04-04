@@ -12,13 +12,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key-for-dev')
 DEBUG = False
 ALLOWED_HOSTS = [
-        'practical-khata.vercel.app',
+    'practical-khata.vercel.app',
     'practical-khata-q62exi9bk-mozahid-aiubs-projects.vercel.app',
+    'practical-khata-git-main-mozahid-aiubs-projects.vercel.app',  # ← NEW
     'www.practicalkhata.pro.bd',
     'practicalkhata.pro.bd',
     'localhost',
     '127.0.0.1',
- '*'
 ]
 
 
