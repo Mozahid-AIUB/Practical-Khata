@@ -10,8 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ── Security & Debug ───────────────────
 SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key-for-dev')
-DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*']
+DEBUG = False
+ALLOWED_HOSTS = ['www.practicalkhata.pro.bd', 'practicalkhata.pro.bd']
 
 
 # ── Installed Apps ─────────────────────
