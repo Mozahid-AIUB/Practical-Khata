@@ -11,16 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ── Security & Debug ───────────────────
 SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key-for-dev')
 DEBUG = False
-ALLOWED_HOSTS = [
-    'practical-khata.vercel.app',
-    'practical-khata-q62exi9bk-mozahid-aiubs-projects.vercel.app',
-    'practical-khata-git-main-mozahid-aiubs-projects.vercel.app',  # ← NEW
-    'www.practicalkhata.pro.bd',
-    'practicalkhata.pro.bd',
-    'localhost',
-    '127.0.0.1',
-]
 
+ALLOWED_HOSTS = ['*']
 
 # ── Installed Apps ─────────────────────
 INSTALLED_APPS = [
@@ -46,6 +38,7 @@ MIDDLEWARE = [
 
 # ── URL Config ───────────────────────
 ROOT_URLCONF = 'config.urls'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 # ── Templates ─────────────────────────
 TEMPLATES = [
@@ -91,6 +84,5 @@ USE_TZ = True
 # ── AI Keys ───────────────────────────
 OPENAI_API_KEY      = os.getenv('OPENAI_API_KEY', '')
 OPENAI_MODEL        = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
-# Do NOT hardcode API keys in source. Prefer environment variables.
 HUGGINGFACE_API_KEY = os.getenv('HUGGINGFACE_API_KEY', '')
 HUGGINGFACE_MODEL   = os.getenv('HUGGINGFACE_MODEL', 'google/flan-t5-small')

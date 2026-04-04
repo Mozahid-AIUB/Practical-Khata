@@ -4,6 +4,8 @@
         "builder": "NIXPACKS"
     },
     "deploy": {
+        "deploymentOverlapSeconds": 0,
+        "preDeployCommand": "python manage.py collectstatic --noinput",
         "startCommand": "gunicorn config.wsgi"
     }
 }
