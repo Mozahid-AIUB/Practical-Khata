@@ -60,6 +60,7 @@ MIDDLEWARE = [
 
 # ── URL Config ───────────────────────
 ROOT_URLCONF = 'config.urls'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 # ── Templates ─────────────────────────
 TEMPLATES = [
