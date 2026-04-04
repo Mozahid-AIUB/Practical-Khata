@@ -11,7 +11,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ── Security & Debug ───────────────────
 SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key-for-dev')
 DEBUG = False
-ALLOWED_HOSTS = ['www.practicalkhata.pro.bd', 'practicalkhata.pro.bd']
+ALLOWED_HOSTS = [
+        'practical-khata.vercel.app',
+    'practical-khata-q62exi9bk-mozahid-aiubs-projects.vercel.app',
+    'www.practicalkhata.pro.bd',
+    'practicalkhata.pro.bd',
+    'localhost',
+    '127.0.0.1',
+ '*'
+]
 
 
 # ── Installed Apps ─────────────────────
