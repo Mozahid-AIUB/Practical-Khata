@@ -14,10 +14,21 @@ DEBUG = False
 
 # ── Allowed Hosts ─────────────────────
 # Base production domains always included.
-_DEFAULT_HOSTS = 'www.practicalkhata.pro.bd,practicalkhata.pro.bd,localhost,127.0.0.1'
+# Both Railway auto domains are listed explicitly so the app is reachable
+# via the Railway-provided URL while DNS propagation completes for the
+# custom domain.
+_DEFAULT_HOSTS = (
+    'www.practicalkhata.pro.bd,'
+    'practicalkhata.pro.bd,'
+    'practical-khata-production.up.railway.app,'
+    'practical-khata-production-67ea.up.railway.app,'
+    'localhost,'
+    '127.0.0.1'
+)
 _allowed = os.getenv('ALLOWED_HOSTS', _DEFAULT_HOSTS).split(',')
 
-# Automatically include the Railway-provided public domain when present.
+# Also include any Railway-provided public domain set via environment variable
+# (covers future domain changes without requiring a code update).
 _railway_domain = os.getenv('RAILWAY_PUBLIC_DOMAIN', '')
 if _railway_domain and _railway_domain not in _allowed:
     _allowed.append(_railway_domain)
