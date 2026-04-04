@@ -11,7 +11,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ── Security & Debug ───────────────────
 SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key-for-dev')
 DEBUG = False
-ALLOWED_HOSTS = ['www.practicalkhata.pro.bd', 'practicalkhata.pro.bd']
+
+# ── Allowed Hosts ─────────────────────
+# Base production domains always included.
+_DEFAULT_HOSTS = 'www.practicalkhata.pro.bd,practicalkhata.pro.bd,localhost,127.0.0.1'
+_allowed = os.getenv('ALLOWED_HOSTS', _DEFAULT_HOSTS).split(',')
+
+# Automatically include the Railway-provided public domain when present.
+_railway_domain = os.getenv('RAILWAY_PUBLIC_DOMAIN', '')
+if _railway_domain and _railway_domain not in _allowed:
+    _allowed.append(_railway_domain)
+
+ALLOWED_HOSTS = [h.strip() for h in _allowed if h.strip()]
 
 
 # ── Installed Apps ─────────────────────
