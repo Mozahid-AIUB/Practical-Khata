@@ -122,7 +122,12 @@
         document.querySelectorAll('img').forEach(img => { img.style.transition = 'opacity 0.4s ease'; if (img.complete) img.style.opacity = 1; else { img.style.opacity = 0; img.onload = () => img.style.opacity = 1; } });
 
     </script>
+    <!-- Vercel Web Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
     <script defer src="/_vercel/insights/script.js"></script>
+    
     {% block extra_js %}{% endblock %}
 </body>
 
