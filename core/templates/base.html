@@ -120,7 +120,9 @@
     <script>
         window.addEventListener('scroll', () => { document.querySelector('.navbar')?.classList.toggle('scrolled', scrollY > 40); }, { passive: true });
         document.querySelectorAll('img').forEach(img => { img.style.transition = 'opacity 0.4s ease'; if (img.complete) img.style.opacity = 1; else { img.style.opacity = 0; img.onload = () => img.style.opacity = 1; } });
+
     </script>
+    <script defer src="/_vercel/insights/script.js"></script>
     {% block extra_js %}{% endblock %}
 </body>
 
